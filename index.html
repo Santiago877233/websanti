@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>List of Content</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f4f4f4;
+    }
+
+    img[alt="logo"] {
+      position: absolute;
+      top: 20px;
+      left: 40px;
+    }
+
+    .row {
+      position: relative;
+    }
+
+    .roo {
+      width: 100%;
+      position: absolute;
+      top: 17%;
+      left: 8%;
+    }
+
+    .back {
+      z-index: 0;
+    }
+
+    .front {
+      z-index: 2;
+    }
+
+    h2 {
+      font-weight: bold;
+      margin-bottom: 30px;
+      font-size: 500%;
+    }
+
+
+    .items {
+      width: 80%;
+      position: absolute;
+      top: 30%;
+      left: 4%;
+      display: flex;
+      justify-content: space-evenly;
+      gap: 1px;
+    }
+
+
+    .item {
+      background: #fff;
+      padding: 70px;
+      border-radius: 15px;
+      font-size: 30px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      flex-wrap: wrap;
+      align-content: flex-start;
+      align-items: normal;
+      flex-direction: row;
+    }
+
+    .item:hover {
+      cursor: pointer;
+      background-color: rgb(0, 153, 255);
+    }
+
+    .item span {
+      background: orange;
+      color: white;
+      font-weight: bold;
+      padding: 15px 2px;
+      border-radius: 50%;
+      margin-right: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+    }
+
+    .image {
+      background: url("asi.jpg") no-repeat center center/cover;
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 50, 0.5);
+    }
+
+    @media (max-width: 768px) {
+      .items {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .item span {
+      background-color: orange;
+      color: white;
+      font-weight: bold;
+      padding: 5px 04px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="./logo.jpg" alt="logo" />
+  <div class="container-fluid">
+    <div class="row">
+      <div class="roo">
+        <h2 id="title">List of Content</h2>
+      </div>
+      <div class="container front">
+        <div class="row items" id="allitems">
+           
+        </div>
+      </div>
+
+      <div class="col-md-12 back">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col">s
+            <div class="image"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+    fetch("https://gist.githubusercontent.com/Santiago877233/82fd0e7d489ab80d0058685ec1e0c0f7/raw/41a7e8fd14ec84ef52261e49407c8f112ef05c0e/santi.json")
+      .then((res) => res.json())
+      .then((res) => {
+        let allitems = document.getElementById("allitems")
+
+        res.forEach((item, i) => {
+          if (i != 0) {
+            const newItem = document.createElement('p');
+            newItem.classList.add('col-md-5', 'item');
+            newItem.innerHTML = `
+            <span id="id${item.id}">${item.number}</span><strong>${item.title}:</strong>
+            ${item.text1}
+          `;
+            allitems.appendChild(newItem);
+          }
+        });
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+
+
+  </script>
+</body>
+
+</html>
